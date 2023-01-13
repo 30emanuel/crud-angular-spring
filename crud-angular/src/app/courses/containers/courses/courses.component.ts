@@ -42,4 +42,9 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  onEdit(course: Course){
+    this.router.navigate(['edit', course._id], {relativeTo: this.route})
+  }
+
 }

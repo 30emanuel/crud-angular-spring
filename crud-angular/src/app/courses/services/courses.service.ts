@@ -18,12 +18,27 @@ export class CoursesService {
     .pipe(
       first(),
       //delay(2000),
-      tap( courses => console.log(courses))
+      //tap( courses => console.log(courses))
     )
   }
 
+  loadById(id: string){
+    return this.http.get<Course>(`${this.API}/${id}`)
+  }
+
   save(course: Partial<Course>){
-    return this.http.post<Course>(this.API, course)
+    if(course._id){
+      return this.update(course)
+    }
+    return this.create(course)
+  }
+
+  private create(course: Partial<Course>){
+    return this.http.post<Course>(this.API, course).pipe(first())
+  }
+
+  private update(course: Partial<Course>){
+    return this.http.put<Course>(`${this.API}/${course._id}`, course).pipe(first())
   }
 
 }
