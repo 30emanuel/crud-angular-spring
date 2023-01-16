@@ -41,4 +41,8 @@ export class CoursesService {
     return this.http.put<Course>(`${this.API}/${course._id}`, course).pipe(first())
   }
 
+  remove(id: string) {
+    return this.http.delete(`${this.API}/${id}`).pipe(first());
+  }
+
 }
